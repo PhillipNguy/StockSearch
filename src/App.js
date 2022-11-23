@@ -1,24 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
+
+import StockSearch from './components/StockSearch';
+import FavoritesList from './components/FavoritesList';
+import SearchHistory from './components/SearchHistory';
+
+export const DataContext = React.createContext()
 
 function App() {
+  const [newStock, setNewStock] = useState();
+  const [stockHistory, setStockHistory] = useState([]);
+  const [favoriteStock, setFavoriteStock] = useState([]);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DataContext.Provider value={{newStock, setNewStock, stockHistory, setStockHistory, favoriteStock, setFavoriteStock}}>
+      <div className="App">
+        <StockSearch/>
+        <SearchHistory/>
+        <FavoritesList/>
+      </div>
+    </DataContext.Provider>
   );
 }
 
